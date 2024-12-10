@@ -11,7 +11,7 @@ def minimum_Fs(f):
     Fs (scalar): the lowest sampling frequency (samples/second) that would
     not cause aliasing at a tone of f Hz.
     '''
-    Fs = 0  # change this line
+    Fs = 2 * f  
     return Fs
 
 def omega(f, Fs):
@@ -25,7 +25,7 @@ def omega(f, Fs):
     @result:
     omega (scalar): radial frequency in radians/sample
     '''
-    omega = 0  # change this line
+    omega = 2 * np.pi * f / Fs
     return omega
 
 def pure_tone(omega, N):
@@ -39,6 +39,19 @@ def pure_tone(omega, N):
     @result:
     x (array): N samples from the signal cos(omega*n)
     '''
-    x = 0 # change this line
+    n = np.arange(N)  
+    x = np.cos(omega * n)
     return x
+
+if __name__ == "__main__":
+    f = 1000  # frequency in Hz
+    Fs = minimum_Fs(f)
+    print("Minimum sampling frequency:", Fs)
+
+    omega_val = omega(f, Fs)
+    print("Radial frequency:", omega_val)
+
+    N = 100 
+    tone = pure_tone(omega_val, N)
+    print("Generated pure tone:", tone)
 
