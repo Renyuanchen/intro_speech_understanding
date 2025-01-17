@@ -1,4 +1,4 @@
-from gtts import gTTS
+import gtts
 
 def synthesize(text, lang, filename):
     try:
